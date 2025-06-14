@@ -6,9 +6,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/Varun0157/cache-library/cache"
-	"github.com/Varun0157/cache-library/cache/policies"
-	"github.com/Varun0157/cache-library/ttl"
+	"github.com/Varun0157/in-mem-cache/cache"
+	"github.com/Varun0157/in-mem-cache/cache/policies"
+	"github.com/Varun0157/in-mem-cache/ttl"
 )
 
 func TestTTLCache_Expiration(t *testing.T) {

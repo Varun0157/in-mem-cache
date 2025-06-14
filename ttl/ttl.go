@@ -4,7 +4,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Varun0157/cache-library/cache"
+	"github.com/Varun0157/in-mem-cache/cache"
 )
 
 // ttlEntry stores the expiration time for a key.

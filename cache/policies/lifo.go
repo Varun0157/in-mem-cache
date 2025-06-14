@@ -4,7 +4,7 @@ import (
 	"container/list"
 	"sync"
 
-	"github.com/Varun0157/cache-library/cache"
+	"github.com/Varun0157/in-mem-cache/cache"
 )
 
 type lifoPolicy[K comparable] struct {

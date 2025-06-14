@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/Varun0157/cache-library/cache"
-	"github.com/Varun0157/cache-library/cache/policies"
-	"github.com/Varun0157/cache-library/ttl"
+	"github.com/Varun0157/in-mem-cache/cache"
+	"github.com/Varun0157/in-mem-cache/cache/policies"
+	"github.com/Varun0157/in-mem-cache/ttl"
 )
 
 // SimplePolicy is a custom eviction policy that implements the cache.EvictionPolicy interface.
