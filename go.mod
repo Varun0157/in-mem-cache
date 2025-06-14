@@ -1,4 +1,4 @@
-module github.com/Varun-157/in-mem-cache
+module github.com/Varun0157/in-mem-cache
 
 go 1.23.2
 
