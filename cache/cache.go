@@ -90,3 +90,6 @@ func (c *Cache[K, V]) Delete(key K) {
 	// Notify the policy of the removal
 	c.policy.OnRemove(key)
 }
+
+// Static assertion to ensure *Cache satisfies the Cacheable interface.
+var _ Cacheable[any, any] = (*Cache[any, any])(nil)
