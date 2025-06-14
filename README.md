@@ -115,10 +115,11 @@ myCache := cache.New[string, int](100, &MyPolicy[string]{})
 
 The library is designed for high performance with minimal allocations. The cache operations are thread-safe and use a combination of a map for O(1) lookups and a linked list for maintaining the eviction order.
 
-## Contributing
+## TODO
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+- [ ] correct paths in docs
+- [ ] more robust testing
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details. 
+This project is licensed under the MIT License - see the LICENSE file for details.
