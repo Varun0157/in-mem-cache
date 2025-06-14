@@ -2,8 +2,11 @@ package main
 
 import (
 	"fmt"
+	"time"
+
 	"github.com/Varun0157/cache-library/cache"
 	"github.com/Varun0157/cache-library/cache/policies"
+	"github.com/Varun0157/cache-library/ttl"
 )
 
 // SimplePolicy is a custom eviction policy that implements the cache.EvictionPolicy interface.
@@ -95,5 +98,40 @@ func main() {
 
 	if val, found := customCache.Get("c"); found {
 		fmt.Printf("Custom Cache contains 'c' with value: %d\n", val)
+	}
+
+	fmt.Println("\n--- Demonstrating TTL Decorator Cache ---")
+	// 1. Create the core cache first.
+	coreCache := cache.New[string, int](10, policies.NewLRU[string]())
+
+	// 2. Wrap it with the TTL decorator.
+	ttlCache := ttl.NewCache[string, int](coreCache)
+
+	// 3. Set a value that expires in 100ms.
+	ttlCache.SetWithTTL("transient", 123, 100*time.Millisecond)
+	fmt.Println("Set 'transient' key with 100ms TTL.")
+
+	// 4. Set a value with no expiration.
+	ttlCache.Set("permanent", 456)
+	fmt.Println("Set 'permanent' key with no TTL.")
+
+	// 5. Verify both values exist initially.
+	if val, found := ttlCache.Get("transient"); found {
+		fmt.Printf("'transient' key exists with value: %d\n", val)
+	}
+	if val, found := ttlCache.Get("permanent"); found {
+		fmt.Printf("'permanent' key exists with value: %d\n", val)
+	}
+
+	// 6. Wait for the TTL to expire.
+	fmt.Println("Waiting for TTL to expire...")
+	time.Sleep(150 * time.Millisecond)
+
+	// 7. Check values after expiration.
+	if _, found := ttlCache.Get("transient"); !found {
+		fmt.Println("'transient' key has correctly expired.")
+	}
+	if val, found := ttlCache.Get("permanent"); found {
+		fmt.Printf("'permanent' key still exists with value: %d\n", val)
 	}
 }

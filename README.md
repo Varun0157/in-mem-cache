@@ -1,6 +1,6 @@
 # In-Memory Cache Library
 
-A thread-safe, extensible, in-memory caching library in Go that supports multiple eviction policies.
+A thread-safe, extensible, in-memory caching library in Go that supports multiple eviction policies and time-based expiration.
 
 ## Features
 
@@ -12,6 +12,7 @@ A thread-safe, extensible, in-memory caching library in Go that supports multipl
   - LIFO (Last In, First Out)
 - Extensible design for custom eviction policies
 - High performance with minimal allocations
+- Optional TTL (Time-To-Live) support via decorator pattern
 
 ## Installation
 
@@ -53,6 +54,31 @@ fifoCache := cache.New[string, int](100, policies.NewFIFO[string]())
 
 // LIFO Cache
 lifoCache := cache.New[string, int](100, policies.NewLIFO[string]())
+```
+
+### Using TTL (Time-To-Live)
+
+The library includes an optional TTL decorator that can be wrapped around any cache instance to add time-based expiration:
+
+```go
+import (
+    "time"
+    "github.com/Varun0157/cache-library/cache"
+    "github.com/Varun0157/cache-library/cache/policies"
+    "github.com/Varun0157/cache-library/ttl"
+)
+
+// 1. Create a standard cache
+core := cache.New[string, string](100, policies.NewLRU[string]())
+
+// 2. Wrap it with the TTL decorator
+ttlCache := ttl.NewCache[string, string](core)
+
+// 3. Set a value with a 5-minute expiration
+ttlCache.SetWithTTL("mykey", "myvalue", 5*time.Minute)
+
+// 4. Set a value with no expiration
+ttlCache.Set("permanent", "value")
 ```
 
 ### Creating Custom Eviction Policies
