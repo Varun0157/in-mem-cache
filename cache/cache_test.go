@@ -1,9 +1,10 @@
 package cache_test
 
 import (
-	"github.com/stretchr/testify/require"
 	"sync"
 	"testing"
+
+	"github.com/stretchr/testify/require"
 
 	"github.com/Varun0157/cache-library/cache"
 	"github.com/Varun0157/cache-library/cache/policies"
@@ -72,11 +73,11 @@ func TestCache_ConcurrentAccess(t *testing.T) {
 	numGoroutines := 10
 	numOperations := 1000
 
-	for i := 0; i < numGoroutines; i++ {
+	for i := range numGoroutines {
 		wg.Add(1)
 		go func(id int) {
 			defer wg.Done()
-			for j := 0; j < numOperations; j++ {
+			for j := range numOperations {
 				key := id*numOperations + j
 				c.Set(key, key)
 				val, found := c.Get(key)
@@ -101,7 +102,7 @@ func BenchmarkCacheSet(b *testing.B) {
 
 func BenchmarkCacheGet(b *testing.B) {
 	c := cache.New[int, int](1024, policies.NewLRU[int]())
-	for i := 0; i < 1000; i++ {
+	for i := range 1000 {
 		c.Set(i, i)
 	}
 
