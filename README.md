@@ -17,7 +17,7 @@ A thread-safe, extensible, in-memory caching library in Go that supports multipl
 ## Installation
 
 ```bash
-go get github.com/Varun0157/cache-library
+go get github.com/Varun0157/in-mem-cache
 ```
 
 ## Usage
@@ -26,8 +26,8 @@ go get github.com/Varun0157/cache-library
 
 ```go
 import (
-    "github.com/Varun0157/cache-library/cache"
-    "github.com/Varun0157/cache-library/cache/policies"
+    "github.com/Varun0157/in-mem-cache/cache"
+    "github.com/Varun0157/in-mem-cache/cache/policies"
 )
 
 // Create a new cache with LRU policy
@@ -63,9 +63,9 @@ The library includes an optional TTL decorator that can be wrapped around any ca
 ```go
 import (
     "time"
-    "github.com/Varun0157/cache-library/cache"
-    "github.com/Varun0157/cache-library/cache/policies"
-    "github.com/Varun0157/cache-library/ttl"
+    "github.com/Varun0157/in-mem-cache/cache"
+    "github.com/Varun0157/in-mem-cache/cache/policies"
+    "github.com/Varun0157/in-mem-cache/ttl"
 )
 
 // 1. Create a standard cache
@@ -114,11 +114,6 @@ myCache := cache.New[string, int](100, &MyPolicy[string]{})
 ## Performance
 
 The library is designed for high performance with minimal allocations. The cache operations are thread-safe and use a combination of a map for O(1) lookups and a linked list for maintaining the eviction order.
-
-## TODO
-
-- [ ] correct paths in docs
-- [ ] more robust testing
 
 ## License
 
