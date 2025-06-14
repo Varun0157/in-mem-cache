@@ -11,7 +11,6 @@ A thread-safe, extensible, in-memory caching library in Go that supports multipl
   - FIFO (First In, First Out)
   - LIFO (Last In, First Out)
 - Extensible design for custom eviction policies
-- High performance with minimal allocations
 - Optional TTL (Time-To-Live) support via decorator pattern
 
 ## Installation
